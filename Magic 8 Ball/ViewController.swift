@@ -2,43 +2,31 @@
 //  ViewController.swift
 //  Magic 8 Ball
 //
-//  Created by Nicholas McGinnis on 12/6/17.
-//  Copyright © 2017 Sinnig Media. All rights reserved.
+//  Created by Angela Yu on 14/06/2019.
+//  Copyright © 2019 The App Brewery. All rights reserved.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
-
-    var randomAnswer = 0
     
-    @IBOutlet weak var eightBallAnswer: UIImageView!
-
+    var randomBall = 0
+    let ballArray = [#imageLiteral(resourceName: "ball1.png"),#imageLiteral(resourceName: "ball2.png"),#imageLiteral(resourceName: "ball3.png"),#imageLiteral(resourceName: "ball4.png"),#imageLiteral(resourceName: "ball5.png")]
     
-    let ballAnswers = ["ball1", "ball2", "ball3", "ball4", "ball5"]
+    @IBOutlet weak var askButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        giveMeAnswer()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func tapAskBtn(_ sender: UIButton) {
-        giveMeAnswer()
+        
+        askButton.layer.cornerRadius = 10
+        askButton.layer.borderWidth = 1
+        askButton.layer.borderColor = UIColor.white.cgColor
     }
     
-    
-    func giveMeAnswer() {
-        randomAnswer = Int(arc4random_uniform(5))
-        eightBallAnswer.image = UIImage(named: ballAnswers[randomAnswer])
-    }
-    
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-        giveMeAnswer()
+    @IBAction func askButtonPressed(_ sender: UIButton) {
+        randomBall = Int.random(in: 0...4)
+        imageView.image = ballArray[randomBall]
     }
 
 }
